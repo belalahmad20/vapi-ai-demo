@@ -9,7 +9,6 @@ import {
   TranscriptMessageTypeEnum,
 } from "@/lib/types/conversation.type";
 import { useEffect, useState } from "react";
-// import { MessageActionTypeEnum, useMessages } from "./useMessages";
 import { vapi } from "@/lib/vapi.sdk";
 
 export enum CALL_STATUS {
@@ -23,6 +22,9 @@ export function useVapi() {
   const [callStatus, setCallStatus] = useState<CALL_STATUS>(
     CALL_STATUS.INACTIVE
   );
+  const [name, setName] = useState("");
+  const [grade, setGrade] = useState("");
+  const [prompt, setPrompt] = useState("");
 
   const [messages, setMessages] = useState<Message[]>([]);
 
@@ -92,7 +94,13 @@ export function useVapi() {
 
   const start = async () => {
     setCallStatus(CALL_STATUS.LOADING);
-    const response = vapi.start(assistant);
+    const response = vapi.start(
+      assistant({
+        name: name ?? "Anonymous",
+        grade: grade ?? "5",
+        prompt,
+      })
+    );
 
     response.then((res) => {
       console.log("call", res);
@@ -121,5 +129,11 @@ export function useVapi() {
     start,
     stop,
     toggleCall,
+    setName,
+    setGrade,
+    name,
+    grade,
+    prompt,
+    setPrompt,
   };
 }

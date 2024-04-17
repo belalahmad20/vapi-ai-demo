@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Inter } from "next/font/google";
 import { Assistant } from "@/components/app/assistant";
 
@@ -10,10 +9,9 @@ export default function Home() {
       className={`flex min-h-screen flex-col items-center justify-between p-12 ${inter.className}`}
     >
       <div className="text-center">
-        <h1 className="text-3xl">Welcome to Broadway Show Assistant</h1>
-        <p className="text-slate-600">
-          Talk with Paula to explore upcoming shows and book tickets.
-        </p>
+        <h1 className="text-3xl">
+          Start a quick chat session with your English tutor
+        </h1>
       </div>
       <Assistant />
     </main>
